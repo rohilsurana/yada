@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<style is="custom-style">
+    :host {
+        display: block;
+    }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #dfdfdf;
+    }
+
+    .content {
+        margin: 0 16px;
+    }
+
+    paper-toolbar {
+        --paper-toolbar-background: #3F5566;
+        height: 56px;
+    }
+
+    paper-toolbar .title {
+        font-size: 13px;
+    }
+
+    .title {
+        direction: ltr;
+        display: block;
+        flex-basis: 201px;
+        flex-grow: 1;
+        flex-shrink: 0;
+        font-family: Roboto;
+        font-size: 13px;
+    }
+
+    .search {
+        box-sizing: border-box;
+        direction: ltr;
+        display: flex;
+        flex-basis: 201px;
+        flex-grow: 1;
+        flex-shrink: 0;
+        font-family: Roboto;
+        font-size: 13px;
+        justify-content: flex-end;
+    }
+
+    .download-item {
+        border-radius: 2px;
+        display: flex;
+        flex: none;
+        width: 622px;
+        height: 103px;
+        margin: 16px auto;
+        background-color: #fff;
+    }
+
+    .icon-wrapper {
+        align-self: center;
+        flex: none;
+        justify-content: center;
+        margin: 0 24px;
+    }
+
+    .details {
+        -webkit-border-start: 1px #d8d8d8 solid;
+        -webkit-padding-end: 16px;
+        -webkit-padding-start: 24px;
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        padding-bottom: 12px;
+        padding-top: 16px;
+    }
+
+    .remove-wrapper {
+        align-self: flex-start;
+        margin: 0;
+    }
+
+    .icon {
+        height: 32px;
+        width: 32px;
+    }
+
+    .remove {
+
+    }
+
+
+    @media all and (max-width: 1024px) {
+        .actions {
+            display: none;
+            width: 0px;
+        }
+    }
+
+    paper-progress {
+        width: 100%;
+    }
+
+    .action {
+        direction: ltr;
+        display: flex;
+        flex-basis: auto;
+        flex-grow: 0;
+        flex-shrink: 0;
+        font-family: Roboto;
+        font-size: 13px;
+        width: 622px;
+        direction: ltr;
+    }
+
+    .buttons-small {
+        width: 32px;
+        height: 32px;
+        padding: 8px;
+    }
+</style>

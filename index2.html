@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hello World!</title>
+  </head>
+  <body>
+    <h1>Hello World!</h1>
+    We are using Node <script>document.write(process.versions.node)</script>,
+    Chrome <script>document.write(process.versions.chrome)</script>,
+    and Electron <script>document.write(process.versions.electron)</script>.
+    <input id="link-place" value="http://hcmaslov.d-real.sci-nnov.ru/public/mp3/Bob%20Dylan/Bob%20Dylan%20'I%20Want%20You'.mp3" type="text"/>
+    <input type="button" onclick="getLink()" value="Click ME!"/>
+    <br><br>
+    <pre>
+    <script>
+    var http = require('http');
+    var url = require('url');
+    var fileSystem = require('fs');
+    var totalSize = 0;
+    function getLink()
+    {
+        var link = document.getElementById("link-place").value;
+        var parsedurl = url.parse(link);
+        var options = {
+            hostname: parsedurl.hostname,
+            port: parsedurl.port,
+            path: parsedurl.path,
+            method: 'HEAD',
+        };
+        var req = http.request(options, function(res) {
+    console.log('STATUS: ' + res.statusCode);
+    // document.write("<pre>"+JSON.stringify(res.headers,null,4)+"</pre>");
+    document.write(res.headers["content-length"]);
+    totalSize = res.headers["content-length"];
+    res.on('end', function() {
+    console.log('No more data in response.')
+      })
+    });
+
+    req.on('error', function(e) {
+      console.log('problem with request: ' + e.message);
+    });
+
+    req.end();
+
+    options.method = 'GET';
+    http.get(options).on('response', function (response) {
+    var body = '';
+    var i = 0;
+    var totalLength = 0;
+    response.on('data', function (chunk) {
+        i++;
+        // body += chunk;
+        fileSystem.appendFile('message2.mp3', chunk, function (err) {
+          if (err) throw err;
+        //   console.log('The "data to append" was appended to file!');
+        });
+        totalLength += chunk.length;
+        console.log('BODY Part: ' + i + "  " + chunk.length + "Percent  " + (totalLength/totalSize)*100);
+    });
+    response.on('end', function () {
+
+        // console.log("Main Body:  "+body.length);
+        console.log('Finished' + totalLength);
+    });
+    });
+
+    }
+    </script>
+    </pre>
+  </body>
+</html>

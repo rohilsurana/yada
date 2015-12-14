@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Downloader</title>
+        <!-- 1. Load webcomponents-lite.min.js for polyfill support. -->
+        <script src="bower_components/webcomponentsjs/webcomponents.min.js"></script>
+        <!-- 2. Use an HTML Import to bring in some elements. -->
+        <link rel="import" href="bower_components/font-roboto/roboto.html">
+        <link rel="import" href="bower_components/iron-icons/iron-icons.html">
+        <link rel="import" href="bower_components/iron-icons/av-icons.html">
+        <link rel="import" href="bower_components/paper-header-panel/paper-header-panel.html">
+        <link rel="import" href="bower_components/paper-material/paper-material.html">
+        <link rel="import" href="bower_components/paper-toolbar/paper-toolbar.html">
+        <link rel="import" href="bower_components/paper-icon-button/paper-icon-button.html">
+        <link rel="import" href="bower_components/paper-button/paper-button.html">
+        <link rel="import" href="bower_components/download-item/download-item.html">
+        <link rel="import" href="bower_components/paper-progress/paper-progress.html">
+        <link rel="import" href="bower_components/paper-tooltip/paper-tooltip.html">
+        <link rel="import" href="bower_components/paper-input/paper-input.html">
+
+        <link rel="import" href="style/main.html">
+    </head>
+    <body class="fullbleed layout vertical">
+        <!-- 3. Declare the element. Configure using its attributes. -->
+        <paper-header-panel class="flex" mode="waterfall">
+
+            <!-- Toolbar -->
+            <paper-toolbar >
+                <div class="title middle" style="font-size:16px;">
+                    Downloads
+                </div>
+                <div class="action middle">
+                    <paper-button id="add-new">Add New</paper-button>
+                    <paper-button id="clear-all">Clear All</paper-button>
+                    <paper-button id="open-folder">Open Downloads Folder</paper-button>
+                </div>
+                <div class="search middle">
+                    <paper-icon-button icon="search">
+                    </paper-icon-button>
+                    <!-- <paper-input label="search" name="search-term"></paper-input> -->
+                    <paper-icon-button icon="more-vert">
+                    </paper-icon-button>
+                </div>
+
+            </paper-toolbar>
+
+            <!-- Content -->
+            <div id="main-container" class="content">
+            </div>
+
+        </paper-header-panel>
+        <script src="app.js"></script>
+    </body>
+</html>
