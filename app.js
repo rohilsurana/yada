@@ -1,15 +1,13 @@
-// // Wait for polyfilled browser to get ready with Web Components
-// var webComponenetsReady = false;
-// document.addEventListener('WebComponentsReady', function() {
-//   webComponenetsReady = true;
-// });
+/*jslint node: true */
+/*jslint esnext: true */
+/*global window: false */
+/*global document: false */
+'use strict';
 // Load required modules
-window.$ = window.jQuery = require("jquery");
-var http = require("http");
-var urlParse = require("url");
-var ipc = require("ipc");
-var shell = require('shell');
-
+const electron = require('electron');
+const http = electron.http;
+const urlParse = electron.url;
+const ipcRenderer = electron.ipcRenderer;
 
 // //Load database using NeDB
 // db = new DataStore({filename: "mainDb"});
@@ -25,76 +23,76 @@ var shell = require('shell');
 
 
 // Regiser all initial event listners here
-$("#add-new").bind('click', sendAddNew);
-$("#clear-all").bind('click', sendClearOld);
-$("#open-folder").bind('click', sendOpenDownloadsFolder);
+document.getElementById('add-new').addEventListener('click', sendAddNew);
+document.getElementById('clear-all').addEventListener('click', sendClearOld);
+document.getElementById('open-folder').addEventListener('click', sendOpenDownloadsFolder);
 
 //All event handlers
 function sendAddNew() {
-  ipc.send('add-new');
+  ipcRenderer.send('add-new');
 }
 
 function sendClearOld() {
-  ipc.send('clear-old');
+  ipcRenderer.send('clear-old');
 }
 
 function sendOpenDownloadsFolder() {
-  ipc.send('open-downloads');
+  ipcRenderer.send('open-downloads');
 }
 
 function sendPauseDownload(itemID) {
-  ipc.send('pause-download', itemID);
+  ipcRenderer.send('pause-download', itemID);
 }
 
 function sendResumeDownload(itemID) {
-  ipc.send('resume-download', itemID);
+  ipcRenderer.send('resume-download', itemID);
 }
 
 function sendCancelDownload(itemID) {
-  ipc.send('cancel-download', itemID);
+  ipcRenderer.send('cancel-download', itemID);
 }
 
 function sendRetryDownload(itemID) {
-  ipc.send('retry-download', itemID);
+  ipcRenderer.send('retry-download', itemID);
 }
 
 function sendRemoveDownload(itemID) {
-  ipc.send('remove-download', itemID);
+  ipcRenderer.send('remove-download', itemID);
 }
 
 function sendOpenDownload(itemID) {
-  ipc.send('open-download', itemID);
+  ipcRenderer.send('open-download', itemID);
 }
 
 function sendShowDownload(itemID) {
-  ipc.send('show-download', itemID);
+  ipcRenderer.send('show-download', itemID);
 }
 
-ipc.on('download-paused', function(event, itemID) {
+ipcRenderer.on('download-paused', function(event, itemID) {
 
 });
 
-ipc.on('download-failed', function(event, itemID) {
+ipcRenderer.on('download-failed', function(event, itemID) {
 
 });
 
-ipc.on('download-resumed', function(event, itemID) {
+ipcRenderer.on('download-resumed', function(event, itemID) {
 
 });
 
-ipc.on('download-cancelled', function(event, itemID) {
+ipcRenderer.on('download-cancelled', function(event, itemID) {
 
 });
 
-ipc.on('download-removed', function(event, itemID) {
+ipcRenderer.on('download-removed', function(event, itemID) {
 
 });
 
-ipc.on('download-updated', function(event, itemID) {
+ipcRenderer.on('download-updated', function(event, itemID) {
 
 });
 
-ipc.on('download-completed', function(event, itemID) {
+ipcRenderer.on('download-completed', function(event, itemID) {
 
 });
 
@@ -107,15 +105,17 @@ ipc.on('download-completed', function(event, itemID) {
 
 
 function createDownloadItem(newItem) {
-  $downloadItem = $("<download-item>").attr("item", JSON.stringify(newItem));
-  $("#main-container").prepend($downloadItem);
+  var downloadItem = document.createElement('download-item');
+  downloadItem.item = JSON.stringify(newItem);
+  var mainContainer = document.getElementById('main-container');
+  mainContainer.insertBefore(downloadItem, mainContainer.firstChild);
 }
 
 //TODO Make this function so that it just removes completed or error downloads
 //TODO Add function to clear all download items removed in previous step
 function clearOldRecords() {
-  db.remove({}, {multi: true}, function(err,numRecords) {
-    console.log("Removed " + numRecords + " records.");
-  });
+  // db.remove({}, {multi: true}, function(err,numRecords) {
+  //   console.log("Removed " + numRecords + " records.");
+  // });
   console.log("Cleared records");
 }

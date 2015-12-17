@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Downloader</title>
+    <!-- 1. Load webcomponents-lite.min.js for polyfill support. -->
+    <script src="bower_components/webcomponentsjs/webcomponents.min.js"></script>
+    <!-- 2. Use an HTML Import to bring in some elements. -->
+    <link rel="import" href="bower_components/font-roboto/roboto.html">
+    <link rel="import" href="bower_components/iron-icons/iron-icons.html">
+    <link rel="import" href="bower_components/iron-icons/av-icons.html">
+    <link rel="import" href="bower_components/paper-material/paper-material.html">
+    <link rel="import" href="bower_components/paper-icon-button/paper-icon-button.html">
+    <link rel="import" href="bower_components/paper-button/paper-button.html">
+    <link rel="import" href="bower_components/paper-tooltip/paper-tooltip.html">
+    <link rel="import" href="bower_components/paper-input/paper-input.html">
+    <link rel="import" href="style/main.html">
+  </head>
+  <body class="fullbleed layout vertical">
+    <div class="content">
+      <paper-input id="address" label="Address" required error-message="Please enter a URL"></paper-input>
+      <paper-input id="filename" label="Filename" required error-message="Please enter a file name"></paper-input>
+      <paper-button id="ok" raised><iron-icon icon="check"></iron-icon> Ok  </paper-button>
+    </div>
+    <script src="addnewdownload.js"></script>
+  </body>
+</html>

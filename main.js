@@ -1,13 +1,20 @@
-var app = require('app');  // Module to control application life.
-var BrowserWindow = require('browser-window');  // Module to create native browser window.
-var ipc = require('ipc');  //Module to communicate between main and renderer process
-var shell = require('shell');  //Module to provide native desktop integration.
+/*jslint node: true */
+/*jslint esnext: true */
+'use strict';
+const electron = require('electron');
+const app = electron.app;  // Module to control application life.
+const BrowserWindow = electron.BrowserWindow;  // Module to create native browser window.
+const ipcMain = electron.ipcMain;  //Module to communicate between main and renderer process
+const shell = electron.shell;  //Module to provide native desktop integration.
+const db = require('NeDB');
 // Report crashes to our server.
-require('crash-reporter').start();  //Add options to this call so that it submits
+//TODO: Add options to this call so that it submits to YADA server
+// electron.crashReporter.start();
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 var mainWindow = null;
+var addNewWindow = null;
 
 // Quit when all windows are closed.
 app.on('window-all-closed', function() {
@@ -18,14 +25,22 @@ app.on('window-all-closed', function() {
   }
 });
 
+function setupAddNewWindow() {
+  addNewWindow = new BrowserWindow({width:450, height:250, show:false});
+  addNewWindow.loadURL('file://' + __dirname + '/addnewdownload.html');
+  addNewWindow.openDevTools();
+  addNewWindow.on('closed', function() {
+    setupAddNewWindow();
+  });
+}
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 app.on('ready', function() {
   // Create the browser window.
-  mainWindow = new BrowserWindow({width: 800, height: 600});
-  addNewWindow = new BrowserWindow({width:200, height:150, show:false});
+  mainWindow = new BrowserWindow({width: 1200, height: 700});
   // and load the index.html of the app.
-  mainWindow.loadUrl('file://' + __dirname + '/index.html');
+  mainWindow.loadURL('file://' + __dirname + '/index.html');
+  mainWindow.openDevTools();
   // Emitted when the window is closed.
   mainWindow.on('closed', function() {
     // Dereference the window object, usually you would store windows
@@ -33,37 +48,46 @@ app.on('ready', function() {
     // when you should delete the corresponding element.
     mainWindow = null;
   });
+  // Setup the add new download window
+  setupAddNewWindow();
 });
 
-ipc.on('add-new', function(e) {
+ipcMain.on('add-new', function(e) {
   console.log('ADD NEW');
-  shell.beep();
+  //set up the add new download window
+  addNewWindow.webContents.send('reset',true);
+  addNewWindow.show();
 });
 
-ipc.on('clear-old', function(e) {
+ipcMain.on('submit-add-new', function(e, newURL, saveName) {
+  console.log(newURL);
+});
+
+ipcMain.on('clear-old', function(e) {
   console.log('CLEAR OLD');
 });
 
-ipc.on('open-downloads', function(e) {
-  shell.openItem("C:\\Users\\Rohil\\Downloads");
+ipcMain.on('open-downloads', function(e) {
+  //TODO: Add respective paths for linux and darwin
+  shell.openItem('C:\\Users\\Rohil\\Downloads');
 });
 
-ipc.on('pause-download', function(event, itemID) {
-
-});
-
-ipc.on('resume-download', function(event, itemID) {
+ipcMain.on('pause-download', function(event, itemID) {
 
 });
 
-ipc.on('cancel-download', function(event, itemID) {
+ipcMain.on('resume-download', function(event, itemID) {
 
 });
 
-ipc.on('retry-download', function(event, itemID) {
+ipcMain.on('cancel-download', function(event, itemID) {
 
 });
 
-ipc.on('remove-download', function(event, itemID) {
+ipcMain.on('retry-download', function(event, itemID) {
+
+});
+
+ipcMain.on('remove-download', function(event, itemID) {
 
 });

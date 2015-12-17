@@ -1,5 +1,5 @@
 {
-  "name": "polymer-project",
+  "name": "yada",
   "dependencies": {
     "paper-badge": "PolymerElements/paper-badge#^1.0.0",
     "paper-behaviors": "PolymerElements/paper-behaviors#^1.0.0",
