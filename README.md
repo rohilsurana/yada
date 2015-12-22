@@ -24,7 +24,12 @@ $ cd yada
 $ npm install && npm start
 ```
 
-##Dependecies
+## Dependecies
 
- [Electron](http://electron.atom.io)
- [NeDB](https://github.com/louischatriot/nedb)
+##### Backend:
+* [Electron](http://electron.atom.io)
+* [NeDB](https://github.com/louischatriot/nedb)
+
+##### Ui:
+* [Polymer paper-elements](https://www.polymer-project.org/1.0/)
+* [download-item](https://rohilsurana.github.io/download-item/)
