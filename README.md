@@ -1,16 +1,15 @@
-# electron-quick-start
+# YADA
 
-**Clone and run for a quick way to see an Electron in action.**
+Yet another downloader app
 
-This is a minimal Electron application based on the [Quick Start Guide](http://electron.atom.io/docs/latest/tutorial/quick-start) within the Electron documentation.
+**Clone and run for a quick way to see it in action.**
 
-An basic Electron application needs just these files:
+This is a downloader application based on the Electron framework(formerly atom-shell).
 
-- `index.html` - A web page to render.
-- `main.js` - Starts the app and creates a browser window to render HTML.
-- `package.json` - Points to the app's main file and lists its details and dependencies.
+It is currently in development stage and is meant to download files via http(s)
+ or ftp protocol. More protocols will be supported in later versions.
 
-You can learn more about each of these components within the [Quick Start Guide](http://electron.atom.io/docs/latest/tutorial/quick-start).
+ It will download files using multiple connections.
 
 ## To Use
 
@@ -18,13 +17,14 @@ To clone and run this repository you'll need [Git](https://git-scm.com) and [Nod
 
 ```bash
 # Clone this repository
-$ git clone https://github.com/atom/electron-quick-start
+$ git clone https://github.com/rohilsurana/yada.git
 # Go into the repository
-$ cd electron-quick-start
+$ cd yada
 # Install dependencies and run the app
 $ npm install && npm start
 ```
 
-Learn more about Electron and its API in the [documentation](http://electron.atom.io/docs/latest).
+##Dependecies
 
-#### License [MIT](LICENSE.md)
+ [Electron](http://electron.atom.io)
+ [NeDB](https://github.com/louischatriot/nedb)

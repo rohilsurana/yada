@@ -14,7 +14,7 @@
     "Electron",
     "downloader",
     "multi-downloads",
-    ""
+    "multi-connection"
   ],
   "author": "Rohil Surana",
   "license": "MIT",
