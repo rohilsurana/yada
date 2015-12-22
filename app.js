@@ -4,11 +4,7 @@
 /*global document: false */
 'use strict';
 // Load required modules
-const electron = require('electron');
-const http = electron.http;
-const urlParse = electron.url;
-const ipcRenderer = electron.ipcRenderer;
-
+const ipcRenderer = require('electron').ipcRenderer;
 // //Load database using NeDB
 // db = new DataStore({filename: "mainDb"});
 // //TODO Add a settings datastore to keep downloads folder link and other settings
